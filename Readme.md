@@ -36,10 +36,15 @@ Random (Password generation)
 
 # 👉 This project is great for learning:
 
-1. How to build GUIs with Tkinter
+1. How to build G[.venv](.venv)UIs with Tkinter
 
 2. How to handle files (CSV & TXT) with Pandas
 
 3. How to integrate clipboard functionality
 
 4. Basics of password security & randomness
+
+# Upgradation Using Json File
+
+import json<br>
+json.dump(json_data, json_file_name, indent = x) -> inserting data into jason file<br>

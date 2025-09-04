@@ -2,6 +2,7 @@ from tkinter import *
 import pandas as pd
 from tkinter import messagebox
 import pyperclip
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -35,6 +36,13 @@ def PasswordManager():
     email = email_entry.get()
     password = password_entry.get()
 
+    new_json = {
+        web : {
+            "email" : email,
+            "password" : password
+        }
+    }
+
     if len(web) == 0 or len(password) == 0:
         messagebox.showinfo(title= "Invalid Information", message= "Please Fill required information")
     else:
@@ -53,6 +61,23 @@ def PasswordManager():
 
     with open("data.txt", 'a') as file:
         file.write(f"{web} | {email} | {password}\n")
+
+    try:
+        with open("data.json", 'r') as file:
+            json_data = json.load(file)
+    except FileNotFoundError:
+        with open("data.json", 'w') as file:
+            json.dump(new_json, file, indent=4)
+    else:
+        json_data.update(new_json)
+        with open("data.json", 'w') as file:
+            json.dump(json_data, file, indent=4)
+
+    finally:
+        web_entry.delete(0, END)
+        password_entry.delete(0, END)
+
+
 
 
 
