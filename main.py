@@ -78,6 +78,19 @@ def PasswordManager():
         password_entry.delete(0, END)
 
 
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+
+def search_passwd():
+    web = web_entry.get()
+    with open("data.json", 'r') as file:
+        data = json.load(file)
+        email= data[web]["email"]
+        passwd= data[web]["password"]
+        if web in data:
+            messagebox.showinfo(title="Credential", message= f"email: {email}\npassword: {passwd}")
+        else:
+            messagebox.showinfo(title="Credential", message= f"Website Doesn't Exist")
+        print(data[web])
 
 
 
@@ -97,7 +110,7 @@ canvas.grid(row = 0, column = 1)
 website_label = Label(text="Website:", bg="white")
 website_label.grid(row=1, column=0, sticky="e", padx=(0, 5), pady=5)
 web_entry = Entry(width=35, bg="white")
-web_entry.grid(row=1, column=1, columnspan=2, sticky="ew", pady=5)
+web_entry.grid(row=1, column=1, sticky="ew", pady=5)
 web_entry.focus()
 
 email_label = Label(text="Email/Username:", bg="white")
@@ -135,6 +148,10 @@ generate_password_button.grid(row=3, column=2, padx=(5, 0), pady=5)
 
 add_button = Button(text="Add", width=36, bg="#d32f2f", fg="white", command= PasswordManager)
 add_button.grid(row=4, column=1, columnspan=2, pady=10)
+
+# Search Button
+search_button = Button(text= "Search", width= 16, bg="#d32f2f", fg="white", font=("Arial", 8), command= search_passwd)
+search_button.grid(row = 1, column= 2, padx=(5, 0), pady=5)
 
 
 window.mainloop()
